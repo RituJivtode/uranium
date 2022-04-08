@@ -20,7 +20,6 @@ router.get('/test-me', function(req, res) {
 //7 April Assignment
 // 1 Problem
 
-
 router.get('/movies', function(req, res) {
     const arr = ['muvi1', 'muvi2', 'muvi3', 'muvi4', 'muvi5']
     res.send(arr)
@@ -49,58 +48,74 @@ router.get('/movies/:indexNumber', function(req, res) {
 
 
 // 4 problem
-// router.get('/films/', function(req, res) {
+router.get('/films', function(req, res) {
 
-//     let film = [{
-//         'id': 1,
-//         'name': 'The Shining'
-//     }, {
-//         'id': 2,
-//         'name': 'Incendies'
-//     }, {
-//         'id': 3,
-//         'name': 'Rang de Basanti'
-//     }, {
-//         'id': 4,
-//         'name': 'Finding Nemo'
-//     }]
+    let film = [{
+        'id': 1,
+        'name': 'The Shining'
+    }, {
+        'id': 2,
+        'name': 'Incendies'
+    }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+    }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+    }]
 
-//     res.send(film)
+    res.send(film)
 
-
-// });
-
-// 5 problem
-router.get('/films/:filmId', function(req, res) {
-    function printMovies() {
-        let film = [{
-            'id': 1,
-            'name': 'The Shining'
-        }, {
-            'id': 2,
-            'name': 'Incendies'
-        }, {
-            'id': 3,
-            'name': 'Rang de Basanti'
-        }, {
-            'id': 4,
-            'name': 'Finding Nemo'
-        }]
-
-        let cinema = req.params.filmId;
-        for (let i = 0; i <= film.length; i++) {
-            if (cinema == film[i].id) {
-                return film[i]
-            } else if (cinema !== film[i].id) {
-                return 'No movie exist with this id.'
-            }
-        }
-    }
-    res.send(printMovies())
 
 });
 
+// 5 problem
+// router.get('/films/:filmId', function(req, res) {
+//     function printMovies() {
+//         let film = [{
+//             'id': 1,
+//             'name': 'The Shining'
+//         }, {
+//             'id': 2,
+//             'name': 'Incendies'
+//         }, {
+//             'id': 3,
+//             'name': 'Rang de Basanti'
+//         }, {
+//             'id': 4,
+//             'name': 'Finding Nemo'
+//         }]
 
+//         let cinema = req.params.filmId;
+//         for (let i = 0; i <= film.length; i++) {
+//             if (cinema == film[i].id) {
+//                 return film[i]
+//             } else if (cinema !== film[i].id) {
+//                 return 'No movie exist with this id.'
+//             }
+//         }
+//     }
+//     res.send(printMovies())
+
+// });
+
+// 1) Find the missing number of given array.
+
+router.get('/array', function(req, res) {
+    const arr = [1, 2, 3, 4, 5, 7, 8, 9];
+
+    function missingNum(arr) {
+        let n = arr.length;
+        let total = (n * (n + 1)) / 2;
+        for (let i = 0; i < n; i++) {
+
+
+        }
+
+    }
+
+
+});
 
 
 module.exports = router;
