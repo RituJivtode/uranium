@@ -48,9 +48,31 @@ router.get('/movies/:indexNumber', function(req, res) {
 
 
 // 4 problem
-router.get('/films', function(req, res) {
+// router.get('/films', function(req, res) {
 
-    let film = [{
+//     let film = [{
+//         'id': 1,
+//         'name': 'The Shining'
+//     }, {
+//         'id': 2,
+//         'name': 'Incendies'
+//     }, {
+//         'id': 3,
+//         'name': 'Rang de Basanti'
+//     }, {
+//         'id': 4,
+//         'name': 'Finding Nemo'
+//     }]
+
+//     res.send(film)
+
+
+// });
+
+// 5 problem
+router.get('/films/:filmId', function(req, res) {
+    const film = req.params.filmId
+    const arryy = [{
         'id': 1,
         'name': 'The Shining'
     }, {
@@ -64,58 +86,58 @@ router.get('/films', function(req, res) {
         'name': 'Finding Nemo'
     }]
 
-    res.send(film)
+    let result = arryy[film]
+    if (result.length <= 0) {
+        res.send("please enter a valid number")
+    } else {
+        res.send(result)
+    }
+
 
 
 });
-
-// 5 problem
-// router.get('/films/:filmId', function(req, res) {
-//     function printMovies() {
-//         let film = [{
-//             'id': 1,
-//             'name': 'The Shining'
-//         }, {
-//             'id': 2,
-//             'name': 'Incendies'
-//         }, {
-//             'id': 3,
-//             'name': 'Rang de Basanti'
-//         }, {
-//             'id': 4,
-//             'name': 'Finding Nemo'
-//         }]
-
-//         let cinema = req.params.filmId;
-//         for (let i = 0; i <= film.length; i++) {
-//             if (cinema == film[i].id) {
-//                 return film[i]
-//             } else if (cinema !== film[i].id) {
-//                 return 'No movie exist with this id.'
-//             }
-//         }
-//     }
-//     res.send(printMovies())
-
-// });
 
 // 1) Find the missing number of given array.
 
 router.get('/array', function(req, res) {
     const arr = [1, 2, 3, 4, 5, 7, 8, 9];
 
-    function missingNum(arr) {
-        let n = arr.length;
-        let total = (n * (n + 1)) / 2;
-        for (let i = 0; i < n; i++) {
-
-
-        }
-
+    let total = 0;
+    for (var i in arr) {
+        total += arr[i];
     }
+
+    let lastDigit = arr.pop()
+    let consecutiveSum = lastDigit * (lastDigit + 1) / 2
+    let missingNumber = consecutiveSum - total
+
+    res.send({ data: missingNumber })
 
 
 });
+
+
+// 2) problem
+router.get("/sol2", function(req, res) {
+    //logic : sum of n consecutive numbers is [ n * (first + last) / 2  ]..so get sum of all numbers in array. now take sum of n consecutive numbers.. n would be length+1 as 1 number is missing
+    let arr = [33, 34, 35, 37, 38]
+    let len = arr.length
+
+    let total = 0;
+    for (var i in arr) {
+        total += arr[i];
+    }
+
+    let firstDigit = arr[0]
+    let lastDigit = arr.pop()
+    let consecutiveSum = (len + 1) * (firstDigit + lastDigit) / 2
+    let missingNumber = consecutiveSum - total
+
+    res.send({
+        data: missingNumber
+    })
+});
+
 
 
 module.exports = router;
