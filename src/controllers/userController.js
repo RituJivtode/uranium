@@ -1,16 +1,21 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
-const createUser = async function(abcd, xyz) {
+
+//====================================que1================================================
+
+const createUser = async function(req, res) {
     //You can name the req, res objects anything.
     //but the first parameter is always the request 
     //the second parameter is always the response
-    let data = abcd.body;
+    let data = req.body;
     let savedData = await userModel.create(data);
-    console.log(abcd.newAtribute);
-    xyz.send({ msg: savedData });
+    // console.log(abcd.newAtribute);
+    res.send({ msg: savedData });
 };
 
+
+//====================================que2=================================================
 const loginUser = async function(req, res) {
     let userName = req.body.emailId;
     let password = req.body.password;
@@ -39,6 +44,7 @@ const loginUser = async function(req, res) {
     res.send({ status: true, data: token });
 };
 
+//========================================que3==================================================
 const getUserData = async function(req, res) {
     let token = req.headers["x-Auth-token"];
     if (!token) token = req.headers["x-auth-token"];
@@ -65,6 +71,7 @@ const getUserData = async function(req, res) {
     res.send({ status: true, data: userDetails });
 };
 
+//========================================que4==================================================
 const updateUser = async function(req, res) {
     // Do the same steps here:
     // Check if the token is present
@@ -83,7 +90,25 @@ const updateUser = async function(req, res) {
     res.send({ status: updatedUser, data: updatedUser });
 };
 
+//========================================que5==================================================
+const deleteUser = async function(req, res) {
+
+
+    let userId = req.params.userId;
+    let user = await userModel.findById(userId);
+    //Return an error if no user with the given id exists in the db
+    if (!user) {
+        return res.send("No such user exists");
+    }
+
+    let deletedUser = await userModel.findOneAndUpdate({ _id: userId }, { $set: { isDeleted: true } }, { new: true });
+
+    res.send({ status: true, data: deletedUser });
+}
+
+
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.deleteUser = deleteUser;
