@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require("../controllers/userController")
-    //const BookController= require("../controllers/bookController")
+const productController = require("../controllers/productController")
+const orderController = require("../controllers/orderController")
+
+
+
+//const BookController= require("../controllers/bookController")
 
 
 // router.get("/test-me", function (req, res) {
@@ -10,7 +15,8 @@ const UserController = require("../controllers/userController")
 
 
 router.post('/create_a_user', UserController.create_a_user)
-router.post('/createProduct', UserController.createProduct)
+router.post('/createProduct', productController.createProduct)
+router.post('/createOrder', orderController.createOrder)
 
 
 

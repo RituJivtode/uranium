@@ -1,7 +1,7 @@
 // @ts-check
 // const req = require("express/lib/request")
 const userModel = require("../models/userModel")
-const productModel = require("../models/productModel")
+
 
 const basicCode = async function(req, res) {
     let tokenDataInHeaders = req.headers.token
@@ -14,21 +14,28 @@ const basicCode = async function(req, res) {
 }
 
 // 20th_April_Assignment
-
+// 2)
 const create_a_user = async function(req, res) {
-    let Users = req.body
-    let cretedUser = await userModel.create(Users)
-    res.send(cretedUser)
-}
-const createProduct = async function(req, res) {
-    let product = req.body
-    let productCreated = await productModel.create(product)
-    res.send(productCreated)
-}
+        let Users = req.body
+        let headers = req.headers
+        let appType = headers["isFreeAppUser"]
+        if (!appType) {
+            appType = headers["isfreeapptuser"]
+        }
+
+        if (!appType) {
+            return res.send({ status: false, msg: "Headere is mandatory." })
+        }
+        let cretedUser = await userModel.create(Users)
+        res.send({ status: true, data: { cretedUser } })
+    }
+    // let cretedUser = await userModel.create(Users)
+    //     res.send(cretedUser)
+    // }
 
 
 module.exports.create_a_user = create_a_user
-module.exports.createProduct = createProduct
+
 
 
 
@@ -70,11 +77,6 @@ const createAUser = function(req, res) {
 
 module.exports.createAUser = createAUser
 module.exports.basicCode = basicCode
-
-
-
-
-
 
 
 

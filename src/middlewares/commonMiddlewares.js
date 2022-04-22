@@ -1,16 +1,16 @@
-// 2)
-const userMiddle = function(req, res, next) {
-    let checkHeader = req.headers.isfreeappuser
-    if (checkHeader) {
-        console.log(checkHeader)
-        res.send({ msg: "Header is mandatory" })
-    } else {
-        next()
-    }
+// // 2)
+// const userMiddle = function(req, res, next) {
+//     let checkHeader = req.headers.isfreeappuser
+//     if (checkHeader) {
+//         console.log(checkHeader)
+//         res.send({ msg: "Header is mandatory" })
+//     } else {
+//         next()
+//     }
 
-}
+// }
 
-module.exports.userMiddle = userMiddle
+// module.exports.userMiddle = userMiddle
 
 
 
