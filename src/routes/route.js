@@ -3,7 +3,7 @@ const router = express.Router();
 const UserController = require("../controllers/userController")
 const productController = require("../controllers/productController")
 const orderController = require("../controllers/orderController")
-
+const validatorMiddle = require("../middlewares/commonMiddlewares")
 
 
 //const BookController= require("../controllers/bookController")
@@ -16,7 +16,7 @@ const orderController = require("../controllers/orderController")
 
 router.post('/create_a_user', UserController.create_a_user)
 router.post('/createProduct', productController.createProduct)
-router.post('/createOrder', orderController.createOrder)
+router.post('/createOrder', validatorMiddle.validateHeader, orderController.createOrder)
 
 
 

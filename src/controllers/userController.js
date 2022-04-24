@@ -1,5 +1,7 @@
 // @ts-check
 // const req = require("express/lib/request")
+const UserModel = require("../models/userModel")
+
 const userModel = require("../models/userModel")
 
 
@@ -20,7 +22,7 @@ const create_a_user = async function(req, res) {
         let headers = req.headers
         let appType = headers["isFreeAppUser"]
         if (!appType) {
-            appType = headers["isfreeapptuser"]
+            appType = headers["isfreeappuser"]
         }
 
         if (!appType) {
