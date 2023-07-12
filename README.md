@@ -1,52 +1,149 @@
-[![N|Solid](https://iili.io/Hi9giog.png)](https://www.enverx.com/)
+To start the server run command: npm start
 
-EnverX offers a simple and convenient platform to fund early-stage projects
-and trade future carbon credits.
+Base URL
+The base URL for all endpoints is: http://localhost:3000
 
-## _Assginment For Backend Developer Role_
+Endpoints
+GET /post
+fetch all blog by using the filters.
 
-### Instructions
-``` diff
-- Fork this repository
-- Take a fresh `pull`
-- Create a `development` branch
-- `Push` the updated code after task completion
-Note: Make sure to add proper `commit` messages
-```
+Response
+Status Code: 200
+{
+    "status": true,
+    "Data": [
+        {
+            "_id": "64aec3d610198c6a3773ae5c",
+            "blogName": "Introduction of Web development",
+            "blogBody": "Frontend",
+            "category": "Web Development",
+            "isDeleted": false,
+            "publishedAt": "2023-12-06T18:30:00.000Z",
+            "createdAt": "2023-07-12T15:16:38.594Z",
+            "updatedAt": "2023-07-12T15:36:40.195Z",
+            "__v": 0
+        },
+        {
+            "_id": "64aecdb07c3adc9a81425331",
+            "blogName": "Introduction of Web development",
+            "blogBody": "Backend",
+            "category": "Programming",
+            "isDeleted": false,
+            "publishedAt": "2023-12-06T18:30:00.000Z",
+            "createdAt": "2023-07-12T15:58:40.254Z",
+            "updatedAt": "2023-07-12T15:58:40.254Z",
+            "__v": 0
+        }
+    ]
+}
+GET /post/:id
+Fetch a specific blog by its ID.
 
-### Task Requirements
-1. Create a RESTful API for a simple blog application.
-2. Use Node.js and Express.js as the backend framework.
-3. Implement CRUD (Create, Read, Update, Delete) operations for blog posts.
-4. Store the blog posts in a dB
-5. Include validation for the API endpoints to ensure data integrity.
-6. Implement error handling and return appropriate HTTP status codes.
-7. Use Git for version control and host the project on GitHub.
-8. Write clear and concise documentation on how to set up and use the API.
-9. Use Typescript to get a Bonus point.
+Input
 
-### Functional Requirements
-1. Set up a new Node.js project and initialize it with a package.json file.
-2. Create the necessary Express.js routes and controllers for CRUD operations on blog posts.
+id - The ID of the blog.
+Response
 
-- `GET /posts` - Get all blog posts (Mandatory: Apply sorting based on created Date, blog name and filters based on category).
-- `GET /posts/:id` - Get a specific blog post by ID.
-- `POST /posts` - Create a new blog post.
-- `PUT /posts/:id` - Update an existing blog post.
-- `DELETE /posts/:id` - Delete a blog post.
+Status Code: 200
+{
+    "status": true,
+    "data": [
+        {
+            "_id": "64aec3d610198c6a3773ae5c",
+            "blogName": "Introduction of Web development",
+            "blogBody": "Frontend",
+            "category": "Programming",
+            "isDeleted": false,
+            "publishedAt": "2023-12-06T18:30:00.000Z",
+            "createdAt": "2023-07-12T15:16:38.594Z",
+            "updatedAt": "2023-07-12T15:16:38.594Z",
+            "__v": 0
+        }
+    ]
+}
 
-3. Implement validation for the API endpoints to ensure the data is correct and complete.
-4. Handle errors gracefully and return appropriate HTTP status codes (e.g., 404 for not found, 500 for server errors, etc.).
-5. Test the API endpoints using a tool like Postman or cURL.
-6. Write a README.md file with instructions on setting up the project, running it, and using the API.
-7. Initialize a Git repository, commit your code regularly, and push it to GitHub.
-8. Optionally, include any additional features or improvements you think would enhance the API.
+POST /post
+Create a new blog.
 
-### Timeline
-The estimated time to complete this assignment is 6-7 hours, but it may vary based on your familiarity and experience with the technologies.
+Request Body
+{
+  "blogName": "Introduction of Web development",
+  "blogBody": "Backend",
+  "category": "Programming",
+  "publishedAt": "12-07-2023"
+}
 
-### To Be Considered
-1. The submitted code should be plagiarism free otherwise your application will be disqualified
-2. Please complete the assignment and submit it to us by the submission deadline assigned to you. 
-3. follow the instructions carefully, as we will evaluate your code, documentation, and adherence to best practices. Once you have finished, please send us the GitHub repository link.
-4. If you have any questions or need further clarification, please don't hesitate to reach out to us at hr@enverx.com. We look forward to reviewing your work and discussing it with you in the next stage of the interview process.
+Response
+
+Status Code: 200
+{
+    "status": true,
+    "data": {
+        "blogName": "Introduction of Web development",
+        "blogBody": "Backend",
+        "category": "Programming",
+        "isDeleted": false,
+        "publishedAt": "2023-12-06T18:30:00.000Z",
+        "_id": "64aecdb07c3adc9a81425331",
+        "createdAt": "2023-07-12T15:58:40.254Z",
+        "updatedAt": "2023-07-12T15:58:40.254Z",
+        "__v": 0
+    }
+}
+PUT /post/:id
+Update a specific blog by its ID.
+
+Input
+
+id - The ID of the blog.
+Request Body
+{
+"category":"Web Development"
+} 
+
+Response
+
+Status Code: 200
+{
+    "status": true,
+    "msg": "done",
+    "data": {
+        "_id": "64aec3d610198c6a3773ae5c",
+        "blogName": "Introduction of Web development",
+        "blogBody": "Frontend",
+        "category": "Web Development",
+        "isDeleted": false,
+        "publishedAt": "2023-12-06T18:30:00.000Z",
+        "createdAt": "2023-07-12T15:16:38.594Z",
+        "updatedAt": "2023-07-12T15:36:40.195Z",
+        "__v": 0
+    }
+}
+
+DELETE /post/:id
+Delete a specific blog by its ID.
+
+Input
+
+id - The ID of the blog.
+Response
+
+Status Code: 200
+{
+    "status": true,
+    "msg": "Document for given blog Id is deleted."
+}
+
+Error Handling
+If an error occurs, the API will respond with an appropriate status code and error message in the response body.
+
+Status Code: 400 Bad Request
+Body:
+{
+  "message": "Send Required Data"
+}
+Status Code: 404 Not Found
+Body:
+{
+  "message": "No such blog exist"
+}
